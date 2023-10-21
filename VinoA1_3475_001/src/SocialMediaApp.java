@@ -10,11 +10,6 @@ public class SocialMediaApp {
 		System.out.println(string);
 	}
 	
-//	public static void read() {
-//		Scanner scan = new Scanner(System.in);
-//		String input = scan.nextLine();
-//	}
-	
 	public static void displayMenu() {
 		print("Select an option:\nEnter\t1 to add a person\n"
 				+ "\t2 to add a person at a specific position\n"
@@ -25,7 +20,7 @@ public class SocialMediaApp {
 				+ "\t7 to add/remove from a person's friends list\n"
 				+ "\t8 to count the total number of persons\n"
 				+ "\t9 to check if the list is empty\n"
-				+ "\t10 or 'q' to exit the app\n");
+				+ "\t10 to exit the app\n");
 	}
 	
 	
@@ -43,7 +38,7 @@ public class SocialMediaApp {
 	}
 	
 	public static void addPersonAt() {
-        System.out.print("Enter position to add (0-" + (userList.getLength()) + "): ");
+        System.out.print("Enter position to add (1-" + (userList.getLength()) + "): ");
         int position = scan.nextInt();
         scan.nextLine();
         //check position validity first
@@ -60,28 +55,19 @@ public class SocialMediaApp {
 		
 		Person newPerson = new Person(name, email, location);
 		userList.add(position, newPerson);
-        print(newPerson + " added at position " + position);
+        print(newPerson.getName() + " added at position " + position);
 	}
 	
 	public static void removePerson() {
-//		Person toRemove = null;
-//		print("Enter the name or email of the person you would like to remove: ");
-//		String personToRemove = scan.nextLine();
-//		toRemove = findPerson(personToRemove);
-//		if(toRemove ==null) {
-//			print("Sorry, we could not find that person. Please check your spelling");
-//		} else {
-//			toRemove
-//		}
 		displayAll();
 		print("\nPlease enter the number of who you want to remove (1-" + (userList.getLength()) + "): ");
         int position = scan.nextInt();
-		if (position < 0 || position >= userList.getLength()) {
+		if (position < 0 || position > userList.getLength()) {
             System.out.println("Invalid index.");
             return;
         } else {
         	Person personToRemove = userList.remove(position);
-        System.out.println("Removed " + personToRemove.getName() + ".");
+        	System.out.println("Removed " + personToRemove.getName() + ".");
         }
 
 
@@ -94,9 +80,9 @@ public class SocialMediaApp {
 	}
 	
 	public static void displayAll() {
-		print("Full user list:\n\n");
-		for(int i = 0; i < userList.getLength(); i++) {
-			print(i + ". " + userList.getEntry(i));
+		print("Full user list:\n");
+		for(int i = 1; i <= userList.getLength(); i++) {
+			print(i + ". " + userList.getEntry(i).getName());
 		}
 	}
 	
@@ -108,7 +94,7 @@ public class SocialMediaApp {
 				print("Search result:\n");
 				print("Name: " + user.getName() + "\nEmail: " + user.getEmail() + "\nLocation: " + user.getLocation() + "\nFriends:\n");
 				for(Person friend : user.getFriends().toArray()) {
-					print(friend.getName() + "\n");
+					print(friend.getName());
 				}
 				print("\n");
 				return;
@@ -146,11 +132,12 @@ public class SocialMediaApp {
 			print("Person could not be found.\n");
 			return;
 		}
-		print("\nWould you like to [a]dd or [r]emove a friend? Please input the appropriate letter.\n");
-		String option = scan.nextLine();
+
 		boolean valid = false;
 		while(!valid) {
-			if(option == "a" || option == "A") {
+			print("\nWould you like to [a]dd or [r]emove a friend? Please input the appropriate letter.\n");
+			String option = scan.nextLine();
+			if(option.equals("a") || option.equals("A")) {
 				print("Please enter the name or email of the friend to be added: ");
 				String friendQuery = scan.nextLine();
 				Person newFriend = findPerson(friendQuery);
@@ -159,8 +146,9 @@ public class SocialMediaApp {
 				} else {
 					selectedUser.addFriend(newFriend);
 					print(newFriend.getName() + " has been added to " + selectedUser.getName() + "'s friendslist.");
+					break;
 				}
-			} else if(option =="r" || option == "R") {
+			} else if(option.equals("r") || option.equals("R")) {
 				print("Enter the name or email of the friend to be removed: ");
 				String friendQuery = scan.nextLine();
 				Person friendToRemove = findPerson(friendQuery);
@@ -169,6 +157,7 @@ public class SocialMediaApp {
 				} else {
 					selectedUser.removeFriend(friendToRemove);
 					print(friendToRemove.getName() + " has been removed from " + selectedUser.getName() + "'s friendslist.");
+					break;
 				}
 			} else {
 				print("Please enter a valid option.\n");
@@ -179,7 +168,7 @@ public class SocialMediaApp {
 	
 	public static void countUsers() {
 		int numOfUsers = userList.getLength();
-		print(Integer.toString(numOfUsers));
+		print("There are " + Integer.toString(numOfUsers) + " total users/persons.");
 		
 	}
 	
@@ -195,41 +184,13 @@ public class SocialMediaApp {
 	}
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		//test
-//		System.out.println("Creating empty Integer list testList");
-//		ListInterface<Integer> testList = new LinkedList<Integer>();
-//		
-//		if(testList.isEmpty()) {
-//			System.out.println("The list is currently empty.\n");
-//			
-//		}
-//		
-//		System.out.println("Adding new items.\n");
-//		testList.add(5);
-//		testList.add(10);
-//		testList.add(15);
-//		testList.add(20);
-//		
-//		//display all items in Linked List
-//		for(int i = 1; i <= testList.getLength(); i++) {
-//			System.out.println(testList.getEntry(i));
-//		}
-//		
-//		Scanner sc = new Scanner(System.in);
-//		
-//		ListInterface<String> person1 = new LinkedList<String>();
-//		System.out.println("Enter the person's name");
-//		String name = sc.nextLine();
-//		person1.add(name);
-//		
-//		System.out.println(person1.getEntry(1));
 		
 		System.out.println("Program start!\n\n");
 		
 		while(true) {
 			displayMenu();
 			int menuOption = scan.nextInt();
+			scan.nextLine();
 			
 			switch(menuOption) {
 			case 1:
@@ -264,6 +225,9 @@ public class SocialMediaApp {
 				break;
 			default:
 				print("That was not an option. Please try again.");
+			}
+			if (menuOption == 10) {
+				break;
 			}
 		}
 	

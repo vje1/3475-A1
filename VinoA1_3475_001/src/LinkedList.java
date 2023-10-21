@@ -116,7 +116,7 @@ public class LinkedList<T> implements ListInterface<T> {
 	@Override
 	public T[] toArray() {
 		// TODO Auto-generated method stub
-		T[] array = (T[])new Object[entries];
+		T[] array = (T[])new Person[entries]; //originally Object
 		
 		int i = 0;
 		Node currentNode = firstNode;

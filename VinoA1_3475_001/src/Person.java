@@ -42,7 +42,7 @@ class Person {
     
     public void removeFriend(Person friend) {
     	int removePosition = -1; //May need to switch the value to -1
-    	for(int i = 0; i < friends.getLength(); i++) {
+    	for(int i = 1; i <= friends.getLength(); i++) { //debug
     		Person friendCompare = friends.getEntry(i);
     		if(friendCompare.getName().equals(friend.getName())) {
     			removePosition = i;
